@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 public class Seats {
-
     private int rows;
     private int col;
     private char[][] seats;
@@ -12,6 +11,8 @@ public class Seats {
         fillCinema();
         drawCinema();
     }
+
+
 
     public void setRows(int rows){
         this.rows = rows;
@@ -35,12 +36,23 @@ public class Seats {
     }
 
     private void drawCinema(){
+        drawHeadline();
         for (int i = 0; i < rows; i++) {
+            System.out.print((i + 1) + " ");
             for (int j = 0; j < col; j++) {
                 System.out.print(seats[i][j] + " ");
             }
             System.out.println();
         }
+    }
+
+    private void drawHeadline(){
+        System.out.println("Cinema:");
+        System.out.print("  ");
+        for (int i = 1; i <= col; i++){
+            System.out.print(i + " ");
+        }
+        System.out.println();
     }
 
 }

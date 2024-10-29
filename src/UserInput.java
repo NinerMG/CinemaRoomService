@@ -8,7 +8,6 @@ public class UserInput {
     public UserInput(){
         calculateIncome =  new CalculateIncome();
         setNumbers();
-        printIncome();
     }
 
     private int getNumber(String message){
