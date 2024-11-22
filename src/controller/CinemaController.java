@@ -1,5 +1,6 @@
 package controller;
 
+import model.Income;
 import model.Seats;
 import service.inputCalculator.InputCalculator;
 import view.DrawCinema;
@@ -8,12 +9,13 @@ import view.UserInput;
 public class CinemaController {
     private Seats seats;
     private InputCalculator inputCalculator;
+    private Income income;
 
     public void start() {
+        income = new Income(0);
          seats = setupSeats();
          inputCalculator = new InputCalculator(seats.getRows(), seats.getCol());
         drawCinema(seats);
-        //calculateAndPrintIncome(seats);
         chooseSeat();
         drawCinema(seats);
     }
@@ -40,9 +42,9 @@ public class CinemaController {
         if (!isSeatValidAndAvailabe(numberOfRow, numberOfSeat)){
             chooseSeat();
         }else {
-
             int price = inputCalculator.getTicketPrice(numberOfRow);
             System.out.println("Ticket price: $" + price);
+            income.updateTotalIncome(price);
             seats.bookSeat(numberOfRow - 1, numberOfSeat - 1);
         }
     }
