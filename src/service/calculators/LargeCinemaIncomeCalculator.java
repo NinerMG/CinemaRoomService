@@ -18,4 +18,11 @@ public class LargeCinemaIncomeCalculator implements IncomeCalculator {
 
        return (frontHalf * col * 10 + backHalf * col * 8);
     }
+
+    @Override
+    public int getTicketPrice(int row) {
+        int frontHalf = row /2;
+        return row < frontHalf ? 10 : 8;
+    }
+
 }

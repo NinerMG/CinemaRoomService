@@ -20,4 +20,7 @@ public class InputCalculator {
         System.out.println("Total income:");
         System.out.println("$" + calculator.calculateIncome());
     }
+    public int getTicketPrice(int row){
+        return calculator.getTicketPrice(row);
+    }
 }

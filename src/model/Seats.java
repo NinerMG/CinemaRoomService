@@ -39,7 +39,17 @@ public class Seats {
             Arrays.fill(seats[i], 'S');
         }
     }
+    public boolean isSeatAvailable(int row, int col){
+        return isSeatValid(row, col) && seats[row][col] == 'S';
+    }
+
     public boolean isSeatOccupied(int row, int col){
         return seats[row][col] == 'B';
+    }
+    public void bookSeat(int row, int col){
+        seats[row][col] = 'B';
+    }
+    public boolean isSeatValid(int row, int col){
+        return (row >= 0 && row < rows) && (col >= 0 && col < this.col);
     }
 }
