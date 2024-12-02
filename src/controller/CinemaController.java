@@ -10,32 +10,30 @@ public class CinemaController {
     private Seats seats;
     private InputCalculator inputCalculator;
     private Income income;
+    private final UserInput userInput = new UserInput();
 
     public void start() {
         income = new Income(0);
-         seats = setupSeats();
-         inputCalculator = new InputCalculator(seats.getRows(), seats.getCol());
-        drawCinema(seats);
-        chooseSeat();
-        drawCinema(seats);
+        seats = setupSeats();
+        inputCalculator = new InputCalculator(seats.getRows(), seats.getCol());
+
+         Menu menu = new Menu(this, income, seats);
+         menu.showMenu();
     }
     private Seats setupSeats() {
-        UserInput userInput = new UserInput();
         int numberOfRows = userInput.getNumber("Enter the number of rows:");
         int numberOfSeats = userInput.getNumber("Enter the number of seats in each row:");
         return new Seats(numberOfRows, numberOfSeats);
     }
-    private void drawCinema(Seats seats) {
+    public void drawCinema(Seats seats) {
         DrawCinema drawCinema = new DrawCinema(seats);
         drawCinema.drawCinema();
     }
     private void calculateAndPrintIncome(Seats seats) {
-        InputCalculator inputCalculator = new InputCalculator(seats.getRows(), seats.getCol());
         inputCalculator.printIncome();
     }
 
-    private void chooseSeat(){
-        UserInput userInput = new UserInput();
+    public void chooseSeat(){
         int numberOfRow = userInput.getNumber("Enter a row number:");
         int numberOfSeat = userInput.getNumber("Enter a seat number in that row:");
         System.out.println();
@@ -50,11 +48,16 @@ public class CinemaController {
     }
 
     private boolean isSeatValidAndAvailabe(int row, int col){
+        if (row <= 0 || col <= 0) {
+            System.out.println("Error: Row and column numbers must be greater than 0.");
+            return false;
+        }
+
         if(!seats.isSeatValid(row, col)){
             System.out.println("Error: The seat number is out of cinema bounds. Please enter a valid seat.");
             return false;
         }
-        if (seats.isSeatOccupied(row, col)){
+        if (seats.isSeatOccupied(row -1, col-1)){
             System.out.println("Error: The seat is already occupied. Please choose a different seat");
             return false;
         }
