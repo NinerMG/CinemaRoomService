@@ -3,6 +3,7 @@ package controller;
 import model.Income;
 import model.Seats;
 import service.inputCalculator.InputCalculator;
+import service.statistics.CinemaStatistics;
 import view.DrawCinema;
 import view.UserInput;
 
@@ -11,13 +12,15 @@ public class CinemaController {
     private InputCalculator inputCalculator;
     private Income income;
     private final UserInput userInput = new UserInput();
+    private CinemaStatistics statistics;
 
     public void start() {
         income = new Income(0);
         seats = setupSeats();
         inputCalculator = new InputCalculator(seats.getRows(), seats.getCol());
+        statistics = new CinemaStatistics(seats, income);
 
-         Menu menu = new Menu(this, income, seats);
+         Menu menu = new Menu(this, income, seats, statistics);
          menu.showMenu();
     }
     private Seats setupSeats() {
@@ -28,9 +31,6 @@ public class CinemaController {
     public void drawCinema(Seats seats) {
         DrawCinema drawCinema = new DrawCinema(seats);
         drawCinema.drawCinema();
-    }
-    private void calculateAndPrintIncome(Seats seats) {
-        inputCalculator.printIncome();
     }
 
     public void chooseSeat(){
@@ -63,7 +63,4 @@ public class CinemaController {
         }
         return true;
     }
-
-
-
 }

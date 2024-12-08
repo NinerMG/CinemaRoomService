@@ -11,10 +11,6 @@ public class Income {
     public int getTotalIncome(){
         return totalIncome;
     }
-
-    public void setTotalIncome(int newTotalIncome){
-        totalIncome = newTotalIncome;
-    }
     public void updateTotalIncome(int income){
         totalIncome += income;
     }

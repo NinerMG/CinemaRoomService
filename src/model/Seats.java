@@ -13,14 +13,6 @@ public class Seats {
         this.col = columnNumber;
         fillCinema();
     }
-
-    public void setRows(int rows){
-        this.rows = rows;
-    }
-    public void setCol(int col){
-        this.col = col;
-    }
-
     public char[][] getSeats() {
         return seats;
     }
@@ -39,10 +31,6 @@ public class Seats {
             Arrays.fill(seats[i], 'S');
         }
     }
-    public boolean isSeatAvailable(int row, int col){
-        return isSeatValid(row, col) && seats[row][col] == 'S';
-    }
-
     public boolean isSeatOccupied(int row, int col){
         return seats[row][col] == 'B';
     }
